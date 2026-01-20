@@ -1,4 +1,4 @@
-# Nepali Date Picker
+# @munatech/nepali-datepicker
 
 A modern, accessible Nepali (Bikram Sambat) date picker component for React 19 with Tailwind CSS v4 styling.
 
@@ -27,16 +27,16 @@ A modern, accessible Nepali (Bikram Sambat) date picker component for React 19 w
 ### Installation
 
 ```bash
-npm install nepali-datepicker
+npm install @munatech/nepali-datepicker
 ```
 
 ### Basic Usage
 
 ```tsx
 import { useState } from 'react'
-import { NepaliDatePicker } from 'nepali-datepicker'
-import type { NepaliDate } from 'nepali-datepicker'
-import 'nepali-datepicker/style.css'
+import { NepaliDatePicker } from '@munatech/nepali-datepicker'
+import type { NepaliDate } from '@munatech/nepali-datepicker'
+import '@munatech/nepali-datepicker/styles.css'
 
 function App() {
   const [date, setDate] = useState<NepaliDate | undefined>()
@@ -58,7 +58,7 @@ function App() {
 The main date picker component with a popover calendar.
 
 ```tsx
-import { NepaliDatePicker } from 'nepali-datepicker'
+import { NepaliDatePicker } from '@munatech/nepali-datepicker'
 
 <NepaliDatePicker
   value={date}
@@ -95,7 +95,7 @@ import { NepaliDatePicker } from 'nepali-datepicker'
 Standalone calendar component without the popover — perfect for inline date selection.
 
 ```tsx
-import { Calendar } from 'nepali-datepicker'
+import { Calendar } from '@munatech/nepali-datepicker'
 
 <Calendar
   selected={date}
@@ -126,7 +126,7 @@ import { Calendar } from 'nepali-datepicker'
 A variant of NepaliDatePicker that includes a "Today" button for quick selection.
 
 ```tsx
-import { NepaliDatePickerWithToday } from 'nepali-datepicker'
+import { NepaliDatePickerWithToday } from '@munatech/nepali-datepicker'
 
 <NepaliDatePickerWithToday
   value={date}
@@ -140,34 +140,43 @@ import { NepaliDatePickerWithToday } from 'nepali-datepicker'
 ### Convert BS to AD
 
 ```tsx
-import { bsToAd } from 'nepali-datepicker'
+import { bsToAd, bsToAdString } from '@munatech/nepali-datepicker'
 
 const adDate = bsToAd(2082, 10, 6)
-// Returns: { year: 2026, month: 1, day: 19 }
+// Returns: { year: 2026, month: 1, day: 20 }
+
+const adDateString = bsToAdString(2082, 10, 6)
+// Returns: "2026-01-20"
 ```
 
 ### Convert AD to BS
 
 ```tsx
-import { adToBs } from 'nepali-datepicker'
+import { adToBs, adToBsString } from '@munatech/nepali-datepicker'
 
 const bsDate = adToBs(2026, 1, 19)
-// Returns: { year: 2082, month: 10, day: 6 }
+// Returns: { year: 2082, month: 10, day: 5 }
+
+const bsDateString = adToBsString(2026, 1, 19)
+// Returns: "2082-10-05"
 ```
 
 ### Get Today's Date in BS
 
 ```tsx
-import { getTodayBs } from 'nepali-datepicker'
+import { getTodayBs, getTodayBsString } from '@munatech/nepali-datepicker'
 
 const today = getTodayBs()
 // Returns current date in BS format
+
+const todayString = getTodayBsString()
+// Returns current date formatted (e.g., "2082-10-06")
 ```
 
 ### Get Days in a BS Month
 
 ```tsx
-import { getDaysInBsMonth } from 'nepali-datepicker'
+import { getDaysInBsMonth } from '@munatech/nepali-datepicker'
 
 const days = getDaysInBsMonth(2082, 10)
 // Returns: 30 (days in Magh 2082)
@@ -176,7 +185,7 @@ const days = getDaysInBsMonth(2082, 10)
 ### Date Validation
 
 ```tsx
-import { isValidBsDate } from 'nepali-datepicker'
+import { isValidBsDate } from '@munatech/nepali-datepicker'
 
 isValidBsDate(2082, 10, 15) // true
 isValidBsDate(2082, 13, 1)  // false - invalid month
@@ -185,7 +194,7 @@ isValidBsDate(2082, 13, 1)  // false - invalid month
 ### Date Comparison
 
 ```tsx
-import { compareBsDates, isBsDateInRange } from 'nepali-datepicker'
+import { compareBsDates, isBsDateInRange } from '@munatech/nepali-datepicker'
 
 const date1 = { year: 2082, month: 10, day: 5 }
 const date2 = { year: 2082, month: 10, day: 15 }
@@ -201,7 +210,7 @@ isBsDateInRange(date1, minDate, maxDate) // true or false
 ### Get First Day of Month
 
 ```tsx
-import { getFirstDayOfBsMonth } from 'nepali-datepicker'
+import { getFirstDayOfBsMonth } from '@munatech/nepali-datepicker'
 
 const dayOfWeek = getFirstDayOfBsMonth(2082, 10)
 // Returns 0-6 (0 = Sunday, 6 = Saturday)
@@ -212,7 +221,7 @@ const dayOfWeek = getFirstDayOfBsMonth(2082, 10)
 ### Format Dates
 
 ```tsx
-import { formatBsDate } from 'nepali-datepicker'
+import { formatBsDate, getBsDateString, formatAdDate } from '@munatech/nepali-datepicker'
 
 const date = { year: 2082, month: 10, day: 15 }
 
@@ -224,12 +233,20 @@ formatBsDate(date, 'MMMM D, YYYY', 'en')
 
 formatBsDate(date, 'MMMM D, YYYY', 'ne')
 // "माघ १५, २०८२"
+
+// Utility for BS date objects
+getBsDateString(date, 'YYYY-MM-DD')
+// "2082-10-15"
+
+// Formatting English (AD) dates
+formatAdDate({ year: 2026, month: 1, day: 20 }, 'MMMM D, YYYY')
+// "January 20, 2026"
 ```
 
 ### Parse Dates
 
 ```tsx
-import { parseBsDate } from 'nepali-datepicker'
+import { parseBsDate } from '@munatech/nepali-datepicker'
 
 const date = parseBsDate('2082-10-15')
 // Returns: { year: 2082, month: 10, day: 15 }
@@ -238,7 +255,7 @@ const date = parseBsDate('2082-10-15')
 ### Convert to Nepali Numerals
 
 ```tsx
-import { toNepaliNumeral } from 'nepali-datepicker'
+import { toNepaliNumeral } from '@munatech/nepali-datepicker'
 
 toNepaliNumeral(2082)
 // Returns: "२०८२"
@@ -247,7 +264,7 @@ toNepaliNumeral(2082)
 ### Get Month/Day Names
 
 ```tsx
-import { getMonthName, getDayName, getMonthNames, getDayNames } from 'nepali-datepicker'
+import { getMonthName, getDayName, getMonthNames, getDayNames } from '@munatech/nepali-datepicker'
 
 getMonthName(10, 'en')  // "Magh"
 getMonthName(10, 'ne')  // "माघ"
@@ -343,13 +360,13 @@ import type {
   NepaliDate, 
   EnglishDate, 
   Language,
-} from 'nepali-datepicker'
+} from '@munatech/nepali-datepicker'
 
 // Component prop types
 import type {
   NepaliDatePickerProps,
   CalendarProps,
-} from 'nepali-datepicker'
+} from '@munatech/nepali-datepicker'
 ```
 
 ### Type Definitions
@@ -443,7 +460,7 @@ import {
   NEPALI_NUMERALS,    // ['०', '१', '२', ...]
   BS_MIN_YEAR,        // 2000
   BS_MAX_YEAR,        // 2100
-} from 'nepali-datepicker'
+} from '@munatech/nepali-datepicker'
 ```
 
 ## 📄 License
