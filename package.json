@@ -45,11 +45,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/example/nepali-datepicker"
+    "url": "git+https://github.com/sanjay-np/nepali-datepicker.git"
   },
-  "homepage": "https://github.com/example/nepali-datepicker#readme",
+  "homepage": "https://github.com/sanjay-np/nepali-datepicker#readme",
   "bugs": {
-    "url": "https://github.com/example/nepali-datepicker/issues"
+    "url": "https://github.com/sanjay-np/nepali-datepicker/issues"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
