@@ -66,6 +66,7 @@ export function NepaliDatePicker({
             <PopoverTrigger asChild>
                 <Button
                     variant="outline"
+                    type="button"
                     disabled={disabled}
                     className={`
                         ndp-w-datepicker ndp-justify-start ndp-text-left ndp-font-normal
@@ -105,6 +106,7 @@ export function NepaliDatePickerWithToday(props: NepaliDatePickerProps) {
             <NepaliDatePicker {...props} closeOnSelect={false} />
             <Button
                 variant="ghost"
+                type="button"
                 size="sm"
                 onClick={handleTodayClick}
                 className="ndp-self-start"
