@@ -1,0 +1,39 @@
+# Source files
+src/
+public/
+
+# Demo files
+index.html
+vite.config.ts
+
+# Development files
+*.log
+*.tsbuildinfo
+.git/
+.gitignore
+node_modules/
+
+# Config files not needed in package
+eslint.config.js
+tsconfig.json
+tsconfig.app.json
+tsconfig.node.json
+tsconfig.lib.json
+vite.lib.config.ts
+
+# Test files
+test-date.ts
+*.test.*
+*.spec.*
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+.DS_Store
+*.local
+
+# Keep only dist/lib for the package
+dist/assets/
+dist/index.html
