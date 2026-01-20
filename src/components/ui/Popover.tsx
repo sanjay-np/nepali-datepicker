@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type ReactNode } from 'react'
+import React, { useState, useRef, useEffect, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 
 interface PopoverProps {
@@ -101,15 +101,25 @@ export function PopoverTrigger({ children, asChild }: PopoverTriggerProps) {
     }
 
     if (asChild && children) {
-        // Clone the child and add our props
-        const child = children as React.ReactElement
+        // Clone the child and add our click handler
+        const child = children as React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>
+        const childWithClick = React.isValidElement(child)
+            ? React.cloneElement(child, {
+                  onClick: (e: React.MouseEvent) => {
+                      // Call child's existing onClick if any
+                      child.props.onClick?.(e)
+                      // Then call our handler
+                      handleClick()
+                  }
+              })
+            : child
+
         return (
             <span
                 ref={triggerRef as React.RefObject<HTMLSpanElement>}
-                onClick={handleClick}
                 style={{ display: 'inline-block' }}
             >
-                {child}
+                {childWithClick}
             </span>
         )
     }
